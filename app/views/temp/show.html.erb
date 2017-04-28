@@ -7,7 +7,7 @@
 <img src="<%=@my_photo.source%>">
 
 <p>
-  <%=@my_photo.created_ate%>
+  <%=time_ago_in_words(@my_photo.created_at)%> ago
 </p>
 
 <a>Go Back</a>
