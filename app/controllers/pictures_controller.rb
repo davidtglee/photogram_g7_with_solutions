@@ -1,45 +1,49 @@
 class PicturesController < ApplicationController
   def show
   @my_photo=Photo.find(params["the_id"])
-
     render("temp/show.html.erb")
   end
+
 def new_form
   @source=params[:file_source]
   @description=params[:description]
-
-  render("temp/new_form.html.erb")
+    render("temp/new_form.html.erb")
 end
 
 def create_row
   p=Photo.new
-  p.caption=params["description"]
+  p.caption=params["cap"]
   p.source=params["the_source"]
   p.save
-
   @current_count=Photo.count
-
-  render("temp/create_row.html.erb")
+  redirect_to("/photos")
 end
 
 def index
-  @list_of_photos=Photo.all.order(created_a=> :desc)
-  render("temp/index.html.erb")
+  @list_of_photos=Photo.all.order(:created_at => "desc")
+    render("temp/index.html.erb")
 end
-
-
 
 def edit_form
     @my_photo=Photo.find(params["la_id"])
-  render("temp/edit_form.html.erb")
+    render("temp/edit_form.html.erb")
 end
 
 def update_row
-  render("temp/update_row.erb")
+  @my_photo=Photo.find(params["le_id"])
+  p=@my_photo
+  p.caption=params["cap"]
+  p.source=params["the_source"]
+  p.save
+  @photos=@my_photo.to_s
+  redirect_to :controller=>"pictures", :action=>"show", :the_id=>params[:le_id]
 end
 
 def destroy_row
-  render("temp/destroy_row.html.erb")
+  @my_photo=Photo.find(params["da_id"])
+  @my_photo.destroy
+  redirect_to("/photos")
+
 end
 
 end

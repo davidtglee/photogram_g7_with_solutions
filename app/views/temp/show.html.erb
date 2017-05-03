@@ -10,6 +10,6 @@
   <%=time_ago_in_words(@my_photo.created_at)%> ago
 </p>
 
-<a>Go Back</a>
-<a>Edit</a>
-<a>Delete</a>
+<a href="http://localhost:3000/photos/"><button>Go Back</button></a>
+<a href="http://localhost:3000/photos/<%=@my_photo.id%>/edit"><button>Edit</button></a>
+<a href="http://localhost:3000/delete_photo/<%=@my_photo.id%>/"><button>Delete</button></a>
