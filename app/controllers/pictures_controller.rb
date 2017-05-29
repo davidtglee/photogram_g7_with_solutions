@@ -14,7 +14,13 @@ def create_row
   p=Photo.new
   p.caption=params["cap"]
   p.source=params["the_source"]
-  p.save
+
+save_status==@photo.save
+
+if save_status==true
+ redirect_to("/photos", {:notice => "Created a photo successfully!"})
+else
+    p.save
   @current_count=Photo.count
   redirect_to("/photos")
 end
